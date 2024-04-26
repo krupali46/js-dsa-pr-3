@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class linkedlist {
+            constructor(d) {
+                this.head = {
+                    data: d,
+                    next: null
+                }
+                this.tail = this.head;
+                this.size = 1;
+            }
+
+            addList(value) {
+                let newNode = {
+                    data: value,
+                    next: null
+                }
+                this.tail.next = newNode;
+                this.tail = newNode;
+                this.size++;
+            }
+            viewList() {
+                let currentNode = this.head;
+                while (currentNode != null) {
+                    console.log(currentNode.data);
+                    currentNode = currentNode.next;
+                }
+            }
+            append(value, newData) {
+                let current = this.head;
+                let newNode = {
+                    data: newData,
+                    next: current.next
+                };
+                current.next = newNode;
+                this.size++;
+                return;
+            }
+
+            updateNode(oldValue, newValue) {
+                let current = this.head;
+                while (current) {
+                    if (current.data === oldValue) {
+                        current.data = newValue;
+                        return;
+                    }
+                    current = current.next;
+                }
+            }
+
+            deleteNode(value) {
+                let current = this.head;
+                if (value === 1) {
+                    this.head = this.head.next;
+                    this.size--;
+                    return;
+                }
+
+                for (let i = 1; i < value - 1; i++) {
+                    current = current.next;
+                }
+
+                current.next = current.next.next;
+                this.size--;
+            }
+
+            reverseList() {
+                let current = this.tail;
+                for(let i=this.size;i>0;i--){//i=5 i>0
+                    console.log("i",i);
+                    let a = this.head;
+                    console.log("a ",a);
+                    
+                    for(let j = 1; j<i; j++){//j=1 j<5
+                        console.log("a in j ",a);
+                        a = a.next;//a=
+                    }         
+                    console.log(current,"current");
+                    a.next = null;
+                    current.next = a;//
+                    current = current.next;//
+                }          
+                let temp = this.head;
+                console.log("temp",temp) 
+                // head   =
+                
+                this.head = this.tail;
+                console.log("this head  ",this.head) 
+                // tail   = 
+                this.tail = temp;
+
+            }
+        }
+        let list = new linkedlist(100);
+        list.addList(200);
+        list.addList(300);
+        list.addList(400);
+        list.addList(500);
+
+        list.viewList();
+        list.reverseList();
+        list.viewList();
+        console.log("list :", list);
+    </script>
+</body>
+
+</html>

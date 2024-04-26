@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class LinkedList {
+            constructor(k) {
+                this.head = {
+                    data: k,
+                    prev: null,
+                    next: null
+                };
+                this.tail = this.head;
+                this.size = 1;
+            }
+
+            addList(value) {
+                let newNode = {
+                    data: value,
+                    prev: this.tail,
+                    next: null
+                };
+                this.tail.next = newNode;
+                this.tail = newNode;
+                this.size++;
+            }
+            updateNode(oldValue, newValue) {
+                let current = this.head;
+
+                while (current) {
+                    if (current.data == oldValue) {
+                        current.data = newValue;
+                        return;
+                    }
+                    current = current.next;
+                }
+            }
+            deleteNode(value) {
+                let current = this.head;
+
+                while (current) {
+                    if (current.data === value) {
+                        if (current === this.head) {
+                            if (this.size === 1) {
+                                this.head = null;
+                                this.tail = null;
+                            } else {
+                                this.head = current.next;
+                                this.head.prev = null;
+                            }
+                        } else if (current === this.tail) {
+                            this.tail = current.prev;
+                            this.tail.next = null;
+                        } else {
+                            current.prev.next = current.next;
+                            current.next.prev = current.prev;
+                        }
+
+                        this.size--;
+                        return;
+                    }
+
+                    current = current.next;
+                }
+            }
+            findMiddle() {
+
+                let current = this.head;
+
+                let mid = this.size / 2;
+                
+                for (let i = 1; i <= mid; i++){
+                    current = current.next;
+                }
+
+                return current.data
+        
+            }
+
+            viewList() {
+                let currentNode = this.head;
+                while (currentNode) {
+                    console.log(currentNode.data);
+                    currentNode = currentNode.next;
+                }
+            }
+        }
+
+        let list = new LinkedList(100);
+        list.addList(200);
+        list.addList(300);
+        list.addList(400);
+        // list.updateNode(200, 250)
+        list.addList(500);
+        console.log("Middle of linked list:", list.findMiddle());
+        list.viewList();
+        console.log("list :", list);
+    </script>
+</body>
+
+</html>
